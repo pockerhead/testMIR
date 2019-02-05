@@ -1,0 +1,6 @@
+framework module Pods_testMIR {
+  umbrella header "Pods-testMIR-umbrella.h"
+
+  export *
+  module * { export * }
+}
