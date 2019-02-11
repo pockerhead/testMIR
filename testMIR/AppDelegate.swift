@@ -20,11 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func configureFirstScreen() {
-        if let token = token {
-            
-        } else {
-            
-        }
+//        if let storedToken = storedToken {
+//
+//        } else {
+            window?.rootViewController = LoginConfigurator.createModule()
+//        }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

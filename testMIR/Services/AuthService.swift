@@ -8,18 +8,23 @@
 
 import Foundation
 import Moya
+import Moya_ObjectMapper
+import RxSwift
 
-enum AuthService {
+enum AuthMoyaService {
     case getToken(userName: String, password: String)
 }
 
-extension AuthService: TargetType {
+extension AuthMoyaService: TargetType {
     var sampleData: Data {
         return Data()
     }
     
     var task: Task {
-        return .requestPlain
+        switch self {
+        case .getToken:
+            return .requestParameters(parameters: self.parameters ?? [:] , encoding: self.parameterEncoding)
+        }
     }
     
     var headers: [String : String]? {
@@ -32,7 +37,7 @@ extension AuthService: TargetType {
     var path: String {
         switch self {
         case .getToken:
-            return "/token"
+            return "token"
         }
         
     }
@@ -52,4 +57,12 @@ extension AuthService: TargetType {
         return JSONEncoding.default
     }
     
+}
+
+let AuthProvider = MoyaProvider<AuthMoyaService>()
+
+class AuthService {
+    static func auth(userName: String, password: String) -> Single<AuthResponse> {
+        return AuthProvider.rx.request(.getToken(userName: userName, password: password)).filterSuccessfulStatusAndRedirectCodes().mapObject(AuthResponse.self)
+    }
 }

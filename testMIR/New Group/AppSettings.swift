@@ -9,7 +9,9 @@
 import Foundation
 import UIKit
 
-var token: String? {
+//MARK: - USER
+
+var storedToken: String? {
     set {
         UserDefaults.standard.set(newValue, forKey: "token")
     }
@@ -18,3 +20,13 @@ var token: String? {
     }
 }
 
+
+//MARK: - NETWORK
+
+typealias Headers = [String : String]
+var defaultHeaders: Headers {
+    return [
+        "Client-Type": "ios",
+        "Accept": "application/json"
+    ]
+}

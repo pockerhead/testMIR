@@ -6,11 +6,19 @@ target 'testMIR' do
   use_frameworks!
 
 	pod "CollectionKit"
-	pod "Moya"
-	pod "ObjectMapper"
+    pod 'ObjectMapper'
+    pod 'Moya'
+    pod 'Moya-ObjectMapper'
+    pod 'Moya/RxSwift'
+    pod 'Moya-ObjectMapper/RxSwift'
 	pod "RxSwift"
 	pod "RxCocoa"
-
+    pod "SDWebImage"
+    pod "Hero"
+    pod 'TweeTextField'
+    pod 'NVActivityIndicatorView'
+    pod "TableKit"
+    
   # Pods for testMIR
 
   target 'testMIRTests' do
